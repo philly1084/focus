@@ -33,6 +33,16 @@
             transition: font-size 0.2s ease; /* Smooth font-size transitions */
         }
 
+        #instructions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            z-index: 10;
+        }
+
         .heart {
             position: absolute;
             color: red;
@@ -53,7 +63,18 @@
     </style>
 </head>
 <body>
+    <div id="instructions">
+        <p><strong>Instructions:</strong></p>
+        <ul>
+            <li>Click anywhere to send a heart floating up.</li>
+            <li>Use the scroll wheel to resize the text.</li>
+     
+        </ul>
+    </div>
+
     <h1 id="message">You Are Important</h1>
+
+ 
 
     <script>
         const message = document.getElementById('message');
