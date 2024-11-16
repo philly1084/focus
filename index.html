@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Are Important</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            animation: rainbowBG 5s linear infinite;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes rainbowBG {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ffffff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: font-size 0.2s ease; /* Smooth font-size transitions */
+        }
+
+        #instructions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            z-index: 10;
+        }
+
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 2em;
+            animation: floatUp 2s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-150px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="instructions">
+        <p><strong>Instructions:</strong></p>
+        <ul>
+            <li>Click anywhere to send a heart floating up.</li>
+            <li>Use the scroll wheel to resize the text.</li>
+            <li>Hold two fingers (or long-press) to view an image.</li>
+        </ul>
+    </div>
+
+    <h1 id="message">You Are Important</h1>
+
+    <div id="image-display">
+        <img id="displayed-image" src="" alt="Surprise Image">
+    </div>
+
+    <script>
+        const message = document.getElementById('message');
+
+        // Add floating heart on click
+        document.body.addEventListener('click', (event) => {
+            createFloatingHeart(event.pageX, event.pageY);
+        });
+
+        function createFloatingHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.textContent = '❤️';
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+
+            document.body.appendChild(heart);
+
+            // Remove the heart after animation ends
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        // Resize text with scroll
+        let fontSize = 3;
+        document.body.addEventListener('wheel', (event) => {
+            event.preventDefault();
+            if (event.deltaY < 0) {
+                fontSize = Math.min(10, fontSize + 0.2);
+            } else {
+                fontSize = Math.max(1, fontSize - 0.2);
+            }
+            message.style.fontSize = `${fontSize}em`;
+        });
+    </script>
+</body>
+</html>
+
